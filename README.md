@@ -10,7 +10,3 @@ Code:
   let destination1 = new Destination('Seattle', 'Space Needle', 'Summer', 'vacation');
   let destination2 = new Destination('NYC', 'Empire State Building', 'Spring', 'good food');
 Expected Output: list of places added
-
-Test: "It will add further properties to each destination object"
-Code: 
-Expected Output: 
