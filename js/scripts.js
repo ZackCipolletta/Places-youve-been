@@ -1,9 +1,9 @@
-function Places() {
-  this.destinations = {};
+function PlacesIveBeen() {
+  this.places = {};
 }
 
-Places.prototype.addDestination = function(destination){
-  this.destination[destination.location] = destination;
+PlacesIveBeen.prototype.addDestination = function(destination){
+  this.places[destination.location] = destination;
 }
 
 function Destination(location, landmarks, timeOfYear, notes) {
