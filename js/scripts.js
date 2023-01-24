@@ -31,29 +31,28 @@ function Destination(location, landmarks, timeOfYear, notes) {
 function displayThings() {
   const place1HTML = document.getElementById('place1')
   const place2HTML = document.getElementById('place2')
-
-  let placesIveBeen = new PlacesIveBeen;
+  const placesIveBeen = new PlacesIveBeen;
   let destination2 = new Destination('NYC', ['Empire State Building'], 'Spring', ['good food']);
   let destination1 = new Destination('Seattle', ['Space Needle'], 'Summer', ['vacation']);
   placesIveBeen.addDestination(destination1);
   placesIveBeen.addDestination(destination2);
   const divEl = document.createElement('div');
+  const divEl2 = document.createElement('div');
   place1HTML.append(divEl);
-  place2HTML.append(divEl);
-  place1HTML.firstChild.innerText = placesIveBeen.location[1].location;
-  place1HTML.id = placesIveBeen.location[1].location;
+  place2HTML.append(divEl2);
+  place1HTML.firstChild.innerText = placesIveBeen.location[2].location;
+  place1HTML.id = placesIveBeen.location[2].location;
   place2HTML.firstChild.innerText = placesIveBeen.location[1].location;
   place2HTML.id = placesIveBeen.location[1].location;
 
   document.getElementById(placesIveBeen.location[1].location).addEventListener('click', location1Func);
-  return place1HTML.id = placesIveBeen.location[1].location;
-
+  document.getElementById(placesIveBeen.location[2].location).addEventListener('click', location2Func);
+  stopChecking();
+ }
+ function stopChecking(){
+  document.getElementById("check").removeEventListener("click", displayThings );
 }
 
-function showDetails() {
-  document.getElementById("Seattle").addEventListener("click", location1Func)
-  // document.getElementById("Seattle").addEventListener("click", location2Func)
-}
 
 function location1Func(){
   let placesIveBeen = new PlacesIveBeen;
@@ -67,36 +66,33 @@ function location1Func(){
     liElement.innerText = (`${key}: ${value}`);
     destinationElement.append(liElement);
   }
+  stop2();
 }
 
+function stop2(){
+  document.getElementById("Seattle").removeEventListener("click", location1Func );
+}
 
+function location2Func(){
+  let placesIveBeen = new PlacesIveBeen;
+  let destination2 = new Destination('NYC', ['Empire State Building'], 'Spring', ['good food']);
+  placesIveBeen.addDestination(destination2);
+  let destinationElement = document.getElementById('NYC');
+  delete(placesIveBeen.location[1].id);
+  delete(placesIveBeen.location[1].location);
+  for(const [key, value] of Object.entries(destination2)) {
+    let liElement = document.createElement('li');
+    liElement.innerText = (`${key}: ${value}`);
+    destinationElement.append(liElement);
+  }
+  stop1()
+}
+function stop1(){
+  document.getElementById("NYC").removeEventListener("click", location2Func );
+}
 
 
 window.addEventListener('load', function() {
   document.getElementById("check").addEventListener("click", displayThings);
   
 });
-
-// //Business logic
-
-// function PlacesIveBeen() {
-//   this.location = {};
-//   this.currentId = 0
-// }
-
-// PlacesIveBeen.prototype.addId = function(){
-//   this.currentId += 1;
-//   return this.currentId;
-// }
-
-// PlacesIveBeen.prototype.addDestination = function(destination){
-//   destination.id = this.addId();
-//   this.location[destination.id] = destination;
-// }
-
-// function Destination(location, landmarks, timeOfYear, notes) {
-//   this.location = location;
-//   this.landmarks = landmarks;
-//   this.timeOfYear = timeOfYear;
-//   this.notes = notes;
-// }
