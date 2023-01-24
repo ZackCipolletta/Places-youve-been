@@ -33,14 +33,17 @@ function displayThings() {
   const place2HTML = document.getElementById('place2')
 
   let placesIveBeen = new PlacesIveBeen;
-  // let destination2 = new Destination('NYC', ['Empire State Building'], 'Spring', ['good food']);
+  let destination2 = new Destination('NYC', ['Empire State Building'], 'Spring', ['good food']);
   let destination1 = new Destination('Seattle', ['Space Needle'], 'Summer', ['vacation']);
   placesIveBeen.addDestination(destination1);
-  // placesIveBeen.addDestination(destination2);
+  placesIveBeen.addDestination(destination2);
   const divEl = document.createElement('div');
   place1HTML.append(divEl);
+  place2HTML.append(divEl);
   place1HTML.firstChild.innerText = placesIveBeen.location[1].location;
   place1HTML.id = placesIveBeen.location[1].location;
+  place2HTML.firstChild.innerText = placesIveBeen.location[1].location;
+  place2HTML.id = placesIveBeen.location[1].location;
 
   document.getElementById(placesIveBeen.location[1].location).addEventListener('click', location1Func);
   return place1HTML.id = placesIveBeen.location[1].location;
@@ -56,9 +59,9 @@ function location1Func(){
   let placesIveBeen = new PlacesIveBeen;
   let destination1 = new Destination('Seattle', ['Space Needle'], 'Summer', ['vacation']);
   placesIveBeen.addDestination(destination1);
-  let placesIveBeen2LM = placesIveBeen.location[1].landmarks;
-  let placesIveBeen2Time = placesIveBeen.location[1].timeOfYear;
   let destinationElement = document.getElementById('Seattle');
+  delete(placesIveBeen.location[1].id);
+  delete(placesIveBeen.location[1].location);
   for(const [key, value] of Object.entries(destination1)) {
     let liElement = document.createElement('li');
     liElement.innerText = (`${key}: ${value}`);
