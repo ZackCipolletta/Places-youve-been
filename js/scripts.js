@@ -25,9 +25,6 @@ function Destination(location, landmarks, timeOfYear, notes) {
 
 //UI logic
 
-
-
-
 function displayThings() {
   const place1HTML = document.getElementById('place1')
   const place2HTML = document.getElementById('place2')
@@ -44,15 +41,10 @@ function displayThings() {
   place1HTML.id = placesIveBeen.location[2].location;
   place2HTML.firstChild.innerText = placesIveBeen.location[1].location;
   place2HTML.id = placesIveBeen.location[1].location;
-
   document.getElementById(placesIveBeen.location[1].location).addEventListener('click', location1Func);
   document.getElementById(placesIveBeen.location[2].location).addEventListener('click', location2Func);
   stopChecking();
  }
- function stopChecking(){
-  document.getElementById("check").removeEventListener("click", displayThings );
-}
-
 
 function location1Func(){
   let placesIveBeen = new PlacesIveBeen;
@@ -61,16 +53,14 @@ function location1Func(){
   let destinationElement = document.getElementById('Seattle');
   delete(placesIveBeen.location[1].id);
   delete(placesIveBeen.location[1].location);
+  const ul = document.createElement('ul');
   for(const [key, value] of Object.entries(destination1)) {
     let liElement = document.createElement('li');
     liElement.innerText = (`${key}: ${value}`);
-    destinationElement.append(liElement);
+    ul.append(liElement);
   }
+  destinationElement.append(ul);
   stop2();
-}
-
-function stop2(){
-  document.getElementById("Seattle").removeEventListener("click", location1Func );
 }
 
 function location2Func(){
@@ -80,17 +70,27 @@ function location2Func(){
   let destinationElement = document.getElementById('NYC');
   delete(placesIveBeen.location[1].id);
   delete(placesIveBeen.location[1].location);
+  const ul = document.createElement('ul');
   for(const [key, value] of Object.entries(destination2)) {
     let liElement = document.createElement('li');
     liElement.innerText = (`${key}: ${value}`);
-    destinationElement.append(liElement);
+    ul.append(liElement);
   }
+  destinationElement.append(ul);
   stop1()
 }
+
+function stopChecking(){
+  document.getElementById("check").removeEventListener("click", displayThings );
+}
+
+function stop2(){
+  document.getElementById("Seattle").removeEventListener("click", location1Func );
+}
+
 function stop1(){
   document.getElementById("NYC").removeEventListener("click", location2Func );
 }
-
 
 window.addEventListener('load', function() {
   document.getElementById("check").addEventListener("click", displayThings);
